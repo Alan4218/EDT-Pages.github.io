@@ -9484,7 +9484,7 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
 
                 table {
                     width: 100%;
-                    min-width: 680px;
+                    min-width: 760px;
                     border-collapse: collapse;
                     table-layout: fixed;
                 }
@@ -10110,10 +10110,13 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
                                         <tr>
                                             <th class="selection-cell"><input id="selectAllHeader" type="checkbox"
                                                     title="全选" aria-label="全选"></th>
-                                            <th style="width: 30%"><button class="sort-header" type="button"
+                                            <th style="width: 27%"><button class="sort-header" type="button"
                                                     data-sort="address">优选IP <span class="sort-mark"
                                                         data-sort-mark="address"></span></button></th>
-                                            <th style="width: 17%"><button class="sort-header" type="button"
+                                            <th style="width: 12%"><button class="sort-header" type="button"
+                                                    data-sort="ipType">IP类型 <span class="sort-mark"
+                                                        data-sort-mark="ipType"></span></button></th>
+                                            <th style="width: 15%"><button class="sort-header" type="button"
                                                     data-sort="type">优选类型 <span class="sort-mark"
                                                         data-sort-mark="type"></span></button></th>
                                             <th style="width: 14%"><button class="sort-header" type="button"
@@ -10122,14 +10125,14 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
                                             <th style="width: 14%"><button class="sort-header" type="button"
                                                     data-sort="latency">延迟(ms) <span class="sort-mark"
                                                         data-sort-mark="latency"></span></button></th>
-                                            <th style="width: 20%"><button class="sort-header" type="button"
+                                            <th style="width: 18%"><button class="sort-header" type="button"
                                                     data-sort="speed">速度(Mbps) <span class="sort-mark"
                                                         data-sort-mark="speed"></span></button></th>
                                         </tr>
                                     </thead>
                                     <tbody id="resultBody">
                                         <tr>
-                                            <td class="empty" colspan="6">暂无结果</td>
+                                            <td class="empty" colspan="7">暂无结果</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -10685,6 +10688,7 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
                         latency,
                         speedState: "pending",
                         speedMbps: null,
+                        ipType: data.ipType || "",
                         responseIp: data.ip || "",
                         colo: data.colo || "",
                         raw: data
@@ -10896,7 +10900,7 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
                     renderSortMarks();
                     syncSelectionWithResults();
                     if (!state.results.length) {
-                        els.resultBody.innerHTML = '<tr><td class="empty" colspan="6">暂无结果</td></tr>';
+                        els.resultBody.innerHTML = '<tr><td class="empty" colspan="7">暂无结果</td></tr>';
                         updateSelectionState();
                         updateActionAvailability();
                         return;
@@ -10908,6 +10912,7 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
                         return `<tr class="result-row${selected ? " is-selected" : ""}" data-result-id="${escapeHtml(id)}">
           <td class="selection-cell"><input type="checkbox" data-select-id="${escapeHtml(id)}" aria-label="选择 ${escapeHtml(item.address)}" ${selected ? "checked" : ""}></td>
           <td class="ip-cell">${escapeHtml(item.address)}</td>
+          <td>${escapeHtml(item.ipType || "未知")}</td>
           <td>${escapeHtml(item.type)}</td>
           <td>${escapeHtml(item.country)}</td>
           <td>${item.latency}ms</td>
