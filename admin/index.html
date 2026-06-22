@@ -11620,20 +11620,23 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
 				const TLS_PORTS = [443, 2053, 2083, 2087, 2096, 8443];
 				const DETECT_ENDPOINTS = {
 					ipv4: [
-						"https://671F0401.bestcf.cmliussss.hidns.vip",
-						"https://6CA2C001.bestcf.cmliussss.hidns.vip",
-						"https://BC726001.bestcf.cmliussss.hidns.vip",
-						"https://68100001.bestcf.cmliussss.hidns.vip",
-						"https://68180001.bestcf.cmliussss.hidns.vip",
-						"https://AC400001.bestcf.cmliussss.hidns.vip"
+						"https://671F04**.bestcf.cmliussss.hidns.vip",
+						"https://6CA2C0**.bestcf.cmliussss.hidns.vip",
+						"https://BC7260**.bestcf.cmliussss.hidns.vip",
+						"https://681000**.bestcf.cmliussss.hidns.vip",
+						"https://681800**.bestcf.cmliussss.hidns.vip",
+						"https://AC4000**.bestcf.cmliussss.hidns.vip"
 					],
 					ipv6: [
-						"https://2606-4700--01.bestcf.cmliussss.hidns.vip",
-						"https://2606-4700--1000-01.bestcf.cmliussss.hidns.vip",
-						"https://2606-4700--2000-01.bestcf.cmliussss.hidns.vip",
-						"https://2606-4700--3000-01.bestcf.cmliussss.hidns.vip"
+						"https://2606-4700--**.bestcf.cmliussss.hidns.vip",
+						"https://2606-4700--1000-**.bestcf.cmliussss.hidns.vip",
+						"https://2606-4700--2000-**.bestcf.cmliussss.hidns.vip",
+						"https://2606-4700--3000-**.bestcf.cmliussss.hidns.vip"
 					]
 				};
+				function expandWildcardEndpoints(endpoints) {
+					return endpoints.map(ep => ep.replace(/\*\*/g, () => Math.floor(Math.random() * 255 + 1).toString(16).padStart(2, '0')));
+				}
 				const IP_LIBRARIES = [
 					{ label: "CF官方列表v4", family: "ipv4", url: "https://cf.090227.xyz/ips-v4" },
 					{ label: "CF官方列表v6", family: "ipv6", url: "https://cf.090227.xyz/ips-v6" },
@@ -12059,7 +12062,7 @@ vless://7b102311-43fd-4e8f-977e-8090623c101d@edt-pages.github.io:443?security=tl
 				}
 
 				async function detectStack(family) {
-					const { endpoint, data } = await fetchJsonFromFastestEndpoint(DETECT_ENDPOINTS[family], "ip.json", 6500);
+					const { endpoint, data } = await fetchJsonFromFastestEndpoint(expandWildcardEndpoints(DETECT_ENDPOINTS[family]), "ip.json", 6500);
 					const allowed = data.country === "CN";
 					return {
 						status: "done",
