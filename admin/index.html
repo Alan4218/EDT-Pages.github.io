@@ -8819,8 +8819,19 @@
 
 					<div id="generatorSection" class="form-group hidden-section">
 						<label for="generatorURL">优选订阅生成器</label>
-						<input type="text" id="generatorURL" title="优选订阅生成器" placeholder="sub.cmliussss.net"
-							onchange="processGeneratorURL()" oninput="processGeneratorURL()">
+						<select id="generatorURL" title="优选订阅生成器" onchange="processGeneratorURL()">
+							<option value="">请选择维护者</option>
+							<option value="Cm.Soso.Edu.Kg">优选维护1</option>
+							<option value="Sub.Cmliussss.Net">优选维护2</option>
+							<option value="Owo.O00o.Ooo">优选维护3</option>
+							<option value="cm.soso.edu.kg">天诚维护</option>
+							<option value="zrf.zrf.me">周润发维护</option>
+							<option value="sub.keaeye.icu">文烨维护</option>
+							<option value="sub.mot.cloudns.biz">Kristi维护</option>
+							<option value="sub.mia.xx.kg">Mia提供维护</option>
+							<option value="sub.lzjbaby.com">辣子鸡提供维护</option>
+							<option value="sub.xdu.qzz.io">辣椒炒肉少放辣维护</option>
+						</select>
 					</div>
 
 					<div class="module-footer">
@@ -17313,17 +17324,7 @@
 			}
 		}
 
-		// 处理优选订阅生成器URL
 		function processGeneratorURL() {
-			const input = document.getElementById('generatorURL').value.trim();
-			let domain = '';
-
-			if (input) {
-				// 如果输入不是空的，提取域名
-				domain = extractDomain(input);
-				document.getElementById('generatorURL').value = domain;
-			}
-
 			markModified('sub');
 		}
 
